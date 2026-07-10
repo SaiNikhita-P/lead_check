@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad Tracking Demo - Page 2: Lead Form</title>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18289360180"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Initialize config with enhanced conversions enabled
+    gtag('config', 'AW-18289360180', {
+      'allow_enhanced_conversions': true
+    });
+  </script>
+
+  <!-- Official Google Ads Event Snippet for Submit Lead Form -->
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18289360180/cwibCNPshs4cELT6hZFE',
+          'value': 10.0,
+          'currency': 'USD',
+          'transaction_id': 'lead_' + Date.now(),
+          'event_callback': callback
+      });
+      return false;
+    }
+  </script>
+
+  <!-- CryptoJS library fallback for SHA-256 when running over plain HTTP / non-localhost URLs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 500px;
+      width: 100%;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    h1 { color: #1a73e8; margin-top: 0; }
+    p { color: #5f6368; line-height: 1.5; font-size: 0.95em; }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #3c4043;
+      font-size: 0.9em;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 1em;
+      transition: border-color 0.2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+    }
+    button {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      font-size: 1em;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+    button:hover { background-color: #1557b0; }
+    button:disabled { background-color: #a8c7fa; cursor: not-allowed; }
+    .debug-box {
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border: 1px solid #e8eaed;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.85em;
+      color: #3c4043;
+      word-break: break-all;
+      display: none;
+    }
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background-color: #e6f4ea;
+      color: #137333;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-weight: 500;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 15px;
+      color: #1a73e8;
+      text-decoration: none;
+      font-size: 0.9em;
+      font-weight: 500;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Landing Page</a>
+    <h1>Lead Capture Form</h1>
+    <p>Please enter your details below. Your information will be securely hashed on your device using <strong>SHA-256</strong> before being transmitted to Google Ads for Enhanced Conversions.</p>
+    
+    <form id="leadForm" onsubmit="handleFormSubmit(event)">
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" required placeholder="john.doe@example.com">
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone Number (with Country Code) *</label>
+        <input type="tel" id="phone" required placeholder="+14155552671">
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" placeholder="John">
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" placeholder="Doe">
+      </div>
+      
+      <button type="submit" id="submitBtn">Submit Lead & Fire Conversion</button>
+    </form>
+
+    <div id="successMessage" class="success-message">
+      🎉 Thank you! Lead submitted and conversion event dispatched to Google Ads!
+    </div>
+
+    <div id="debugBox" class="debug-box">
+      <strong>🔒 SHA-256 Hashed Payload Sent to gtag:</strong><br>
+      <pre id="debugOutput" style="white-space: pre-wrap; margin-top: 8px;"></pre>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * Normalizes and computes the SHA-256 hex hash of a string.
+     * Supports both Web Crypto API (HTTPS/localhost) and CryptoJS fallback (plain HTTP / hostnames).
+     */
+    async function sha256Hash(inputString) {
+      if (!inputString) return null;
+      
+      // 1. Normalize: Trim leading/trailing whitespace and convert to lowercase
+      const normalized = inputString.trim().toLowerCase();
+      
+      // 2. Try native Web Crypto API first (Secure Contexts / HTTPS / localhost)
+      if (window.crypto && window.crypto.subtle) {
+        try {
+          const encoder = new TextEncoder();
+          const data = encoder.encode(normalized);
+          const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+          const hashArray = Array.from(new Uint8Array(hashBuffer));
+          return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        } catch (e) {
+          console.warn("Web Crypto API failed, falling back to CryptoJS:", e);
+        }
+      }
+      
+      // 3. Fallback to CryptoJS for HTTP / Insecure Contexts (e.g. cloud workstation HTTP URLs)
+      if (typeof CryptoJS !== 'undefined') {
+        return CryptoJS.SHA256(normalized).toString(CryptoJS.enc.Hex);
+      }
+      
+      throw new Error("No SHA-256 implementation available in this browser context.");
+    }
+
+    /**
+     * Normalizes phone numbers according to Google Ads requirements (E.164 format).
+     */
+    function normalizePhone(phoneString) {
+      if (!phoneString) return '';
+      let cleaned = phoneString.replace(/[\s\-\(\)]/g, '');
+      if (!cleaned.startsWith('+')) {
+        cleaned = '+' + cleaned;
+      }
+      return cleaned;
+    }
+
+    async function handleFormSubmit(event) {
+      event.preventDefault(); // Prevent standard form reload
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Encrypting & Sending...';
+
+      const rawEmail = document.getElementById('email').value;
+      const rawPhone = normalizePhone(document.getElementById('phone').value);
+      const rawFirstName = document.getElementById('firstName').value;
+      const rawLastName = document.getElementById('lastName').value;
+
+      try {
+        const hashedEmail = await sha256Hash(rawEmail);
+        const hashedPhone = await sha256Hash(rawPhone);
+        const hashedFirstName = rawFirstName ? await sha256Hash(rawFirstName) : undefined;
+        const hashedLastName = rawLastName ? await sha256Hash(rawLastName) : undefined;
+
+        const userDataPayload = {
+          "sha256_email_address": hashedEmail,
+          "sha256_phone_number": hashedPhone
+        };
+
+        if (hashedFirstName) userDataPayload.sha256_first_name = hashedFirstName;
+        if (hashedLastName) userDataPayload.sha256_last_name = hashedLastName;
+
+        // 1. Set the pre-hashed user data in gtag BEFORE calling the conversion snippet
+        gtag('set', 'user_data', userDataPayload);
+
+        // 2. Call Google's official gtag_report_conversion function to fire the conversion!
+        gtag_report_conversion();
+
+        document.getElementById('debugOutput').innerText = JSON.stringify(userDataPayload, null, 2);
+        document.getElementById('debugBox').style.display = 'block';
+        document.getElementById('successMessage').style.display = 'block';
+        document.getElementById('leadForm').style.display = 'none';
+        
+        console.log('✅ Enhanced Conversion fired with SHA-256 hashed user_data:', userDataPayload);
+      } catch (error) {
+        console.error('Error during hashing or gtag dispatch:', error);
+        alert('An error occurred while processing the form: ' + error.message);
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Submit Lead & Fire Conversion';
+      }
+    }
+  </script>
+</body>
+</html>
