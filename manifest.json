@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "ECL Tag Verifier",
+  "version": "1.0",
+  "description": "Filters and validates Google Ads Conversion pings.",
+  "permissions": [
+    "webRequest"
+  ],
+  "host_permissions": [
+    "*://www.googleadservices.com/*",
+    "*://www.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
