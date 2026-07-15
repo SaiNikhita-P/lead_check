@@ -8,7 +8,8 @@
   ],
   "host_permissions": [
     "*://www.googleadservices.com/*",
-    "*://www.google.com/*"
+    "*://www.google.com/*",
+    "*://*.github.io/*"
   ],
   "background": {
     "service_worker": "background.js"
