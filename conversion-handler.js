@@ -112,8 +112,6 @@ async function handleFormSubmit(event) {
     gtagReportConversion();
 
     // UI Updates
-    document.getElementById('debugOutput').innerText = JSON.stringify(userDataPayload, null, 2);
-    document.getElementById('debugBox').style.display = 'block';
     document.getElementById('successMessage').style.display = 'block';
     document.getElementById('leadForm').style.display = 'none';
     
