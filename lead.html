@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subscription Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18289360180"></script>
@@ -25,23 +27,131 @@
   <script src="conversion-handler.js" defer></script>
   
   <style>
-    /* Retain your original styles here */
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f5f7fa; margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
-    .container { max-width: 500px; width: 100%; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    h1 { color: #1a73e8; margin-top: 0; }
-    p { color: #5f6368; line-height: 1.5; font-size: 0.95em; }
-    .form-group { margin-bottom: 20px; text-align: left; }
-    label { display: block; margin-bottom: 6px; font-weight: 600; color: #3c4043; font-size: 0.9em; }
-    input[type="text"], input[type="email"], input[type="tel"] { width: 100%; padding: 12px; border: 1px solid #dadce0; border-radius: 6px; box-sizing: border-box; font-size: 1em; transition: border-color 0.2s; }
-    input:focus { outline: none; border-color: #1a73e8; box-shadow: 0 0 0 2px rgba(26,115,232,0.2); }
-    button { background-color: #1a73e8; color: white; border: none; padding: 14px 24px; font-size: 1em; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; transition: background-color 0.2s; }
-    button:hover { background-color: #1557b0; }
-    button:disabled { background-color: #a8c7fa; cursor: not-allowed; }
-    .debug-box { margin-top: 25px; padding: 15px; background-color: #f8f9fa; border: 1px solid #e8eaed; border-radius: 6px; font-family: monospace; font-size: 0.85em; color: #3c4043; word-break: break-all; display: none; }
-    .success-message { display: none; text-align: center; padding: 20px; background-color: #e6f4ea; color: #137333; border-radius: 8px; margin-top: 20px; font-weight: 500; }
-    .back-link { display: inline-block; margin-bottom: 15px; color: #1a73e8; text-decoration: none; font-size: 0.9em; font-weight: 500; }
-    .back-link:hover { text-decoration: underline; }
-  </style>
+  body { 
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+    background: linear-gradient(135deg, #f0f4f9 0%, #e9eef6 100%); 
+    margin: 0; 
+    padding: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+  }
+
+  .container { 
+    max-width: 550px; 
+    width: 90%; 
+    background: #ffffff; 
+    padding: 45px 40px; 
+    border-radius: 24px; 
+    box-shadow: 0 12px 24px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.04); 
+  }
+
+  /* Neat modern Top Bar navigation */
+  .back-link { 
+    display: inline-flex; 
+    align-items: center;
+    margin-bottom: 25px; 
+    color: #444746; 
+    text-decoration: none; 
+    font-size: 0.95em; 
+    font-weight: 500; 
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: #0b57d0; }
+
+  h1 { 
+    color: #1f1f1f; 
+    margin: 0 0 10px 0; 
+    font-size: 2em; 
+    font-weight: 700;
+  }
+  
+  p { 
+    color: #444746; 
+    line-height: 1.5; 
+    font-size: 1em; 
+    margin-bottom: 35px;
+  }
+
+  .form-group { 
+    margin-bottom: 24px; 
+    text-align: left; 
+  }
+
+  label { 
+    display: block; 
+    margin-bottom: 8px; 
+    font-weight: 600; 
+    color: #1f1f1f; 
+    font-size: 0.9em; 
+  }
+
+  /* Sleek, Outlined Material Design inputs */
+  input[type="text"], input[type="email"], input[type="tel"] { 
+    width: 100%; 
+    padding: 14px 16px; 
+    border: 1px solid #747775; 
+    border-radius: 8px; 
+    box-sizing: border-box; 
+    font-size: 1em; 
+    transition: border-color 0.2s, box-shadow 0.2s; 
+    background-color: transparent;
+    color: #1f1f1f;
+  }
+
+  input:focus { 
+    outline: none; 
+    border-color: #0b57d0; 
+    border-width: 2px;
+    box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.15); 
+  }
+
+  /* Rounded, glowing Google-style pill button */
+  button { 
+    background-color: #0b57d0; 
+    color: white; 
+    border: none; 
+    padding: 15px 30px; 
+    font-size: 1em; 
+    font-weight: 600; 
+    border-radius: 50px; 
+    cursor: pointer; 
+    width: 100%; 
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s; 
+    box-shadow: 0 4px 12px rgba(11, 87, 208, 0.25);
+    margin-top: 10px;
+  }
+
+  button:hover { 
+    background-color: #0842a0; 
+    box-shadow: 0 8px 16px rgba(11, 87, 208, 0.3);
+    transform: translateY(-1px);
+  }
+
+  button:active {
+    transform: translateY(0);
+  }
+
+  button:disabled { 
+    background-color: #e1e3e1; 
+    color: #8e918f;
+    box-shadow: none; 
+    cursor: not-allowed; 
+  }
+
+  .success-message { 
+    display: none; 
+    text-align: center; 
+    padding: 20px; 
+    background-color: #c4eed0; 
+    color: #072711; 
+    border-radius: 12px; 
+    margin-top: 20px; 
+    font-weight: 500; 
+  }
+</style>
+
 </head>
 <body>
   <div class="container">
