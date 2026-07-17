@@ -5,65 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ad Tracking Demo - Page 1: Landing Page</title>
   
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18289360180"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'AW-18289360180');
   </script>
   
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #f5f7fa;
-      margin: 0;
-      padding: 40px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    :root {
+      --google-blue: #1a73e8;
+      --google-blue-hover: #1765cc;
+      --google-grey-900: #202124;
+      --google-grey-700: #5f6368;
+      --google-grey-300: #dadce0;
+      --google-grey-100: #f1f3f4;
+      --google-blue-light: #e8f0fe;
     }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--google-grey-900);
+    }
+
     .container {
-      max-width: 600px;
+      max-width: 800px; /* Expanded Width */
+      width: 90%;
       background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 48px; /* Roomier padding */
+      border-radius: 16px; /* GM3 rounded corners */
+      box-shadow: 0 1px 3px rgba(60,64,67,0.15), 0 1px 2px rgba(60,64,67,0.3); /* Subtle Google Shadow */
       text-align: center;
     }
-    h1 { color: #1a73e8; margin-top: 0; }
-    p { color: #5f6368; line-height: 1.6; }
+
+    h1 {
+      font-family: 'Google Sans', sans-serif;
+      color: var(--google-grey-900);
+      margin-top: 0;
+      font-weight: 500;
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+    }
+
+    p {
+      color: var(--google-grey-700);
+      line-height: 1.6;
+      font-size: 1.05rem;
+      max-width: 550px;
+      margin: 0 auto 8px auto;
+    }
+
+    .meta-tag {
+      color: var(--google-grey-700);
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-bottom: 24px;
+      display: block;
+    }
+
     .banner-link {
       display: inline-block;
-      margin-top: 20px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      border-radius: 8px;
-      overflow: hidden;
+      margin-top: 32px;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+      border-radius: 12px;
       text-decoration: none;
+      width: 100%;
+      max-width: 650px; /* Banner is larger */
     }
+
     .banner-link:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 15px rgba(0,0,0,0.15);
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(60,64,67,0.16);
     }
+
     .banner-image {
       width: 100%;
-      max-width: 500px;
       height: auto;
       display: block;
-      border: 2px solid #e8eaed;
-      border-radius: 8px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
+
     .badge {
-      background-color: #e8f0fe;
+      background-color: var(--google-blue-light);
       color: #1967d2;
-      padding: 4px 12px;
-      border-radius: 16px;
-      font-size: 0.85em;
-      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 50px; /* Pill-shaped badge */
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
       display: inline-block;
-      margin-bottom: 15px;
+      margin-bottom: 24px;
+    }
+
+    /* Footer / Watermark style */
+    .footer-note {
+      margin-top: 40px;
+      font-size: 0.8rem;
+      color: var(--google-grey-700);
     }
   </style>
 </head>
@@ -71,23 +124,27 @@
   <div class="container">
     <span class="badge">Google Ads Tracking Demo</span>
     <h1>Welcome to Our Offer</h1>
-    <p>Sale Upto 50% off</p>
-    <p>Advertisement</p>
+    <p>Sale Up to 50% off on all premium subscriptions!</p>
+    <span class="meta-tag">Advertisement</span>
     
     <!-- Clicking this picture leads to Page 2 -->
     <a href="lead.html" class="banner-link" onclick="trackBannerClick()">
-      <svg class="banner-image" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
-        <rect width="500" height="250" fill="#1a73e8" rx="8"/>
-        <circle cx="400" cy="50" r="80" fill="#4285f4" opacity="0.5"/>
-        <circle cx="100" cy="200" r="100" fill="#1967d2" opacity="0.3"/>
-        <text x="250" y="110" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Special Exclusive Offer</text>
-        <text x="250" y="150" font-family="Arial, sans-serif" font-size="18" fill="#e8f0fe" text-anchor="middle">Click Here to Claim →</text>
+      <svg class="banner-image" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="220" fill="#1a73e8" rx="12"/>
+        <!-- Fun abstract Google-inspired shapes -->
+        <circle cx="430" cy="40" r="90" fill="#4285f4" opacity="0.6"/>
+        <circle cx="50" cy="180" r="120" fill="#1967d2" opacity="0.4"/>
+        <path d="M 380 220 L 500 120 L 500 220 Z" fill="#34a853" opacity="0.3"/>
+        <text x="250" y="95" font-family="'Google Sans', 'Roboto', sans-serif" font-size="28" font-weight="500" fill="white" text-anchor="middle">Special Exclusive Offer</text>
+        <rect x="150" y="125" width="200" height="40" rx="20" fill="white" box-shadow="0 2px 4px rgba(0,0,0,0.2)"/>
+        <text x="250" y="151" font-family="'Google Sans', 'Roboto', sans-serif" font-size="15" font-weight="500" fill="#1a73e8" text-anchor="middle">Click Here to Claim →</text>
       </svg>
     </a>
+
+    <div class="footer-note">Secure lead ingestion powered by Google Ads Measurement.</div>
   </div>
 
   <script>
-    // Optional: Track the click event before navigating
     function trackBannerClick() {
       gtag('event', 'banner_click', {
         'event_category': 'engagement',
