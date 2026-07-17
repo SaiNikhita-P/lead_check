@@ -117,7 +117,7 @@ async function handleFormSubmit(event) {
     document.getElementById('successMessage').style.display = 'block';
     document.getElementById('leadForm').style.display = 'none';
     
-    console.log('✅ Enhanced Conversion fired with SHA-256 hashed user_data:', userDataPayload);
+    console.log(' Enhanced Conversion fired with SHA-256 hashed user_data:', userDataPayload);
   } catch (error) {
     console.error('Error during hashing or gtag dispatch:', error);
     alert('An error occurred while processing the form: ' + error.message);
